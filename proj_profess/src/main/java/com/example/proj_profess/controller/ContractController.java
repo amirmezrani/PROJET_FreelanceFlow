@@ -49,5 +49,5 @@ public class ContractController {
     public ResponseEntity<?> deleteContract (@PathVariable Long idContract){
         return contractService.deleteContract(idContract);
     }
-D
+
 }
