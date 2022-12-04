@@ -1,5 +1,6 @@
 package com.example.proj_profess.controller;
 
+import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,12 @@ public class ProviderController {
     @PutMapping("/editProvider/{idProvider}")
     public Provider editProvider (@PathVariable Long idProvider, @RequestBody Provider provider ){
         return providerService.editProvider(idProvider,provider);
+    }
+
+    @PutMapping("/editPassword/{idProvider}")
+    public Provider editPasswordProvider(@PathVariable Long idProvider, @RequestBody PasswordInfo passwordInfo){
+        return providerService.editPasswordProvider(idProvider,passwordInfo);
+
     }
 
     @DeleteMapping("deleteProvider/{idProvider}")

@@ -1,5 +1,6 @@
 package com.example.proj_profess.controller;
 
+import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.Client;
 import com.example.proj_profess.service.ClientService;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,10 @@ public class ClientController {
     public Client editClient (@PathVariable Long idClient, @RequestBody Client client ){
         return clientService.editClient(idClient,client);
 
+    }
+    @PutMapping("/editPassword/{idClient}")
+    public Client editPasswordClient(@PathVariable Long idClient, @RequestBody PasswordInfo passwordInfo){
+        return clientService.editPasswordClient(idClient,passwordInfo);
     }
     @DeleteMapping("deleteClient/{idClient}")
     public ResponseEntity<?> deleteClient (@PathVariable Long idClient){

@@ -1,15 +1,15 @@
 package com.example.proj_profess.service;
 
+import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.City;
 import com.example.proj_profess.entity.Client;
+import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.repository.ClientRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -44,6 +44,17 @@ public class ClientService {
         client1.setPassword(client.getPassword());
         return clientRepo.save(client1);
 
+    }
+
+    public Client editPasswordClient(Long idClient, PasswordInfo passwordInfo){
+        Client client=getClientById(idClient);
+        if (client.getPassword().equals(passwordInfo.getPassword())){
+            client.setPassword(passwordInfo.getNewPassword());
+            return clientRepo.save(client);
+        }
+        else {
+            throw new RuntimeException("password not valid");
+        }
     }
 
     public ResponseEntity<?> deleteClient (Long idClient){

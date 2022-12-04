@@ -1,5 +1,6 @@
 package com.example.proj_profess.service;
 
+import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.City;
 import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.entity.Speciality;
@@ -7,6 +8,7 @@ import com.example.proj_profess.repository.ProviderRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -59,6 +61,17 @@ public class ProviderService {
         provider1.setPassword(provider.getPassword());
         return providerRepo.save(provider1);
 
+    }
+
+    public Provider editPasswordProvider(Long idProvider, PasswordInfo passwordInfo){
+        Provider provider=getProviderById(idProvider);
+        if (provider.getPassword().equals(passwordInfo.getPassword())){
+            provider.setPassword(passwordInfo.getNewPassword());
+            return providerRepo.save(provider);
+        }
+        else {
+            throw new RuntimeException("password not valid");
+        }
     }
 
     public ResponseEntity<?> deleteProvider (Long idProvider){
