@@ -21,6 +21,23 @@ public class ContractController {
         return contractService.addContract(contract);
     }
 
+    @GetMapping("/getContract/accept")
+    public List<Contract> getAllContractAccept(){
+        return contractService.getAllContractAccept();
+    }
+
+    @GetMapping("/getContract/reject")
+    public List<Contract> getAllContractReject(){
+        return contractService.getAllContractReject();
+    }
+
+
+    @GetMapping("/getContract/pending")
+    public List<Contract> getAllContractPending(  ){
+        return contractService.getAllContractPending();
+    }
+
+
     @GetMapping("/getContract/{idContract}")
     public Contract getContractById(@PathVariable Long idContract){
         return contractService.getContractById(idContract);

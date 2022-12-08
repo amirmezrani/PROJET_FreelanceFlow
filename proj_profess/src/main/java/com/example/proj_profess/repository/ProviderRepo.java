@@ -7,11 +7,7 @@ import java.util.List;
 
 public interface ProviderRepo extends JpaRepository<Provider, Long> {
 
-   /* default List<Provider> findBySpecialityId() {
-        return findBySpecialityId();
-    }*/
-
-   // List<Provider> findBySpecialityId(Long idSpeciality );
-   // List<Provider> findByCityId(Long idCity);
-    //List<Provider> findBySpecialityIdAndCityId(Long idSpeciality,Long idCity );
+    List<Provider> findBySpecialityIdSpeciality(Long idSpeciality );
+    List<Provider> findByCityIdCity(Long idCity);
+    List<Provider> findBySpecialityIdSpecialityAndCityIdCity(Long idSpeciality,Long idCity );
 }

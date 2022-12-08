@@ -32,9 +32,9 @@ public class ProviderController {
         return providerService.getAllProvider();
     }
 
-    /*@GetMapping("/speciality/{idSpeciality}/getProvider")
-    public List<Provider> getProviderBySpecialityId (@PathVariable Long idSpecility){
-        return  providerService.getProviderBySpecialityId(idSpecility);
+    @GetMapping("/speciality/{idSpeciality}/getProvider")
+    public List<Provider> getProviderBySpecialityId (@PathVariable Long idSpeciality){
+        return  providerService.getProviderBySpecialityId(idSpeciality);
     }
 
     @GetMapping("/city/{idCity}/getProvider")
@@ -42,11 +42,11 @@ public class ProviderController {
         return  providerService.getProviderByCityId(idCity);
     }
 
-    @GetMapping("/Speciality/{idSpeciality}/city/{idCity}/getProvider")
-    public List<Provider> getProviderBySpecialityIdAndCityId (@PathVariable Long idSpecility,
+    @GetMapping("/speciality/{idSpeciality}/city/{idCity}/getProvider")
+    public List<Provider> getProviderBySpecialityIdAndCityId (@PathVariable Long idSpeciality,
                                                               @PathVariable Long idCity){
-        return  providerService.getProviderBySpecialityIdAndCityId(idSpecility,idCity);
-    }*/
+        return  providerService.getProviderBySpecialityIdAndCityId(idSpeciality,idCity);
+    }
 
     @PutMapping("/editProvider/{idProvider}")
     public Provider editProvider (@PathVariable Long idProvider, @RequestBody Provider provider ){

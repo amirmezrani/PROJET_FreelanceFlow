@@ -25,17 +25,17 @@ public class ProviderService {
         return  providerRepo.findById(idProvider).orElseThrow(()-> new IllegalArgumentException("Provider ID not Found"));
     }
 
-   /* public List<Provider> getProviderBySpecialityId (Long idSpeciality){
-        return  providerRepo.findBySpecialityId(idSpeciality);
+    public List<Provider> getProviderBySpecialityId (Long idSpeciality){
+        return  providerRepo.findBySpecialityIdSpeciality(idSpeciality);
     }
 
     public List<Provider> getProviderByCityId (Long idCity){
-        return  providerRepo.findByCityId(idCity);
+        return  providerRepo.findByCityIdCity(idCity);
     }
 
     public List<Provider> getProviderBySpecialityIdAndCityId (Long idSpeciality,Long idCity){
-        return  providerRepo.findBySpecialityIdAndCityId(idSpeciality,idCity);
-    }*/
+        return  providerRepo.findBySpecialityIdSpecialityAndCityIdCity(idSpeciality,idCity);
+    }
 
     public List<Provider> getAllProvider(){
         return providerRepo.findAll();

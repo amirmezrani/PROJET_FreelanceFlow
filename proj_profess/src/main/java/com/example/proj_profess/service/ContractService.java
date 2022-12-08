@@ -1,14 +1,12 @@
 package com.example.proj_profess.service;
 
-import com.example.proj_profess.entity.Client;
 import com.example.proj_profess.entity.Contract;
-import com.example.proj_profess.entity.Job;
-import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.repository.ContractRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +24,40 @@ public class ContractService {
 
     public List<Contract> getAllContractProvider(Long idProvider){
         return contractRepo.findByProviderId(idProvider);
+    }
+
+    public List<Contract> getAllContractAccept(){
+        List<Contract> contracts= contractRepo.findAll();
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse().equals("true")){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
+    }
+
+    public List<Contract> getAllContractReject(){
+        List<Contract> contracts= contractRepo.findAll();
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse().equals("false")){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
+    }
+
+
+    public List<Contract> getAllContractPending(){
+        List<Contract> contracts= contractRepo.findAll();
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse()==null){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
     }
 
     public List<Contract> getAllContractClient(Long idClient){
