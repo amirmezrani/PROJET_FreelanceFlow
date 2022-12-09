@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ContractService {
     private ProviderService providerService;
     private ClientService clientService;
     private JobService jobService;
+    private MailSenderService mailSenderService;
 
     public Contract getContractById (Long idContract){
         return  contractRepo.findById(idContract)
@@ -85,6 +87,14 @@ public class ContractService {
     public Contract acceptContract(Long idContract){
         Contract contract=getContractById(idContract);
         contract.setResponse("true");
+        try {
+            this.mailSenderService.send(contract.getClient().getEmail(),
+                    "Service demandé  ",
+                    "votre service commandé est acceptée");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         return contractRepo.save(contract);
 
