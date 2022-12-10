@@ -74,6 +74,18 @@ public class ProviderService {
         }
     }
 
+    public Provider feedBack(Long idProvider, int feed ){
+        Provider provider=getProviderById(idProvider);
+        int numb= provider.getNumbFeed();
+        double f=(provider.getFeed()*numb)+feed;
+        numb++;
+        f=f/numb;
+        provider.setFeed(f);
+        provider.setNumbFeed(provider.getNumbFeed()+1);
+
+        return providerRepo.save(provider);
+    }
+
     public ResponseEntity<?> deleteProvider (Long idProvider){
         providerRepo.deleteById(idProvider);
         return ResponseEntity.ok().build();

@@ -26,7 +26,18 @@ public class Provider extends User{
     @Column(name = "phone", nullable = false,unique = true)
     private int phone;
 
+    @Column(columnDefinition="TEXT")
+    private String description;
+
     private String street;
+
+    private String longitude;
+
+    private String latitude;
+
+    private double feed;
+    @JsonIgnore
+    private int numbFeed;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCity",nullable = false)
@@ -101,5 +112,43 @@ public class Provider extends User{
         this.speciality = speciality;
     }
 
+    public double getFeed() {
+        return feed;
+    }
 
+    public void setFeed(double feed) {
+        this.feed = feed;
+    }
+
+    public int getNumbFeed() {
+        return numbFeed;
+    }
+
+    public void setNumbFeed(int numbFeed) {
+        this.numbFeed = numbFeed;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 }

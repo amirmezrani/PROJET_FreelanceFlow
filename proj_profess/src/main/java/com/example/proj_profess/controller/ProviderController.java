@@ -59,6 +59,11 @@ public class ProviderController {
 
     }
 
+    @PutMapping("/feedBack/{idProvider}")
+    public Provider feedBack(@PathVariable Long idProvider,@RequestParam(value = "feed") int feed){
+        return providerService.feedBack(idProvider,feed) ;
+    }
+
     @DeleteMapping("deleteProvider/{idProvider}")
     public ResponseEntity<?> deleteProvider (@PathVariable Long idProvider){
         return providerService.deleteProvider(idProvider);
