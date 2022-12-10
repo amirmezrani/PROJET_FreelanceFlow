@@ -58,7 +58,9 @@ public class ProviderService {
         provider1.setBirthday(provider.getBirthday());
         provider1.setCity(provider.getCity());
         provider1.setStreet(provider.getStreet());
-        provider1.setPassword(provider.getPassword());
+        provider1.setDescription(provider.getDescription());
+        provider1.setLatitude(provider.getLatitude());
+        provider1.setLongitude(provider.getLongitude());
         return providerRepo.save(provider1);
 
     }
