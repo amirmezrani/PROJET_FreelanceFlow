@@ -7,6 +7,7 @@ import com.example.proj_profess.entity.Client;
 import com.example.proj_profess.repository.ClientRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class ClientService {
 
     private ClientRepo clientRepo;
     private CityService cityService;
+
+
 
     public Client getClientById (Long idClient){
         return  clientRepo.findById(idClient).orElseThrow(()-> new IllegalArgumentException("Client ID not Found"));
@@ -35,6 +38,7 @@ public class ClientService {
     public Client addClient(Client client){
         City city=cityService.getCityById(client.getCity().getIdCity());
         client.setCity(city);
+       // client.setPassword(passwordEncoder.encode(client.getPassword()));
         return clientRepo.save(client);
     }
 
