@@ -17,6 +17,19 @@ public class City {
 
     private String label;
 
+    public Long getIdCity() {
+        return idCity;
+    }
 
+    public void setIdCity(Long idCity) {
+        this.idCity = idCity;
+    }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }

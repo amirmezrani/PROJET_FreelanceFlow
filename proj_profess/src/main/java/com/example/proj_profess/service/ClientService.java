@@ -1,9 +1,9 @@
 package com.example.proj_profess.service;
 
+import com.example.proj_profess.dto.Auth;
 import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.City;
 import com.example.proj_profess.entity.Client;
-import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.repository.ClientRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +20,12 @@ public class ClientService {
 
     public Client getClientById (Long idClient){
         return  clientRepo.findById(idClient).orElseThrow(()-> new IllegalArgumentException("Client ID not Found"));
+    }
+
+    public Client getProviderByEmail (String email){
+        Client client =  clientRepo.findByEmail(email).
+                orElseThrow(()-> new IllegalArgumentException("client email not Found"));
+        return client;
     }
 
     public List<Client> getAllClient(){
@@ -55,6 +61,25 @@ public class ClientService {
         else {
             throw new RuntimeException("password not valid");
         }
+    }
+
+    public Client authenticateClient(Auth auth)
+    {
+        Client client = getProviderByEmail(auth.getEmail());
+        boolean isAuthenticated = false;
+        if(client !=null)
+        {
+            if(client.getPassword().equals(auth.getPassword()))
+            {
+                isAuthenticated = true;
+            }
+
+        }
+        if(isAuthenticated)
+            return client;
+        else
+            throw new IllegalArgumentException(" password not valid");
+
     }
 
     public ResponseEntity<?> deleteClient (Long idClient){

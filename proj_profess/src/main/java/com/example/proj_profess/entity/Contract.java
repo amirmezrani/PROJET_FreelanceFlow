@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idContract;
     private String response;
+    private LocalDateTime localDateTime;
 
     //private Date date;
 
@@ -73,5 +76,13 @@ public class Contract {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.proj_profess.service;
 
+import com.example.proj_profess.dto.Auth;
 import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.City;
 import com.example.proj_profess.entity.Provider;
@@ -8,7 +9,6 @@ import com.example.proj_profess.repository.ProviderRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -23,6 +23,12 @@ public class ProviderService {
 
     public Provider getProviderById (Long idProvider){
         return  providerRepo.findById(idProvider).orElseThrow(()-> new IllegalArgumentException("Provider ID not Found"));
+    }
+
+    public Provider getProviderByEmail (String email){
+        Provider provider=  providerRepo.findByEmail(email).
+                orElseThrow(()-> new IllegalArgumentException("Provider email not Found"));
+        return provider;
     }
 
     public List<Provider> getProviderBySpecialityId (Long idSpeciality){
@@ -74,6 +80,25 @@ public class ProviderService {
         else {
             throw new RuntimeException("password not valid");
         }
+    }
+
+    public Provider authenticateProvider(Auth auth)
+    {
+        Provider provider  = getProviderByEmail(auth.getEmail());
+        boolean isAuthenticated = false;
+        if(provider!=null)
+        {
+            if(provider.getPassword().equals(auth.getPassword()))
+            {
+                isAuthenticated = true;
+            }
+
+        }
+        if(isAuthenticated)
+            return provider;
+        else
+            throw new IllegalArgumentException("password not valid");
+
     }
 
     public Provider feedBack(Long idProvider, int feed ){

@@ -1,5 +1,6 @@
 package com.example.proj_profess.controller;
 
+import com.example.proj_profess.dto.Auth;
 import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.service.ProviderService;
@@ -62,6 +63,11 @@ public class ProviderController {
     @PutMapping("/feedBack/{idProvider}")
     public Provider feedBack(@PathVariable Long idProvider,@RequestParam(value = "feed") int feed){
         return providerService.feedBack(idProvider,feed) ;
+    }
+
+    @GetMapping("/auth")
+    public Provider authenticateProvider(@RequestBody Auth auth){
+        return providerService.authenticateProvider(auth);
     }
 
     @DeleteMapping("deleteProvider/{idProvider}")

@@ -1,7 +1,9 @@
 package com.example.proj_profess.controller;
 
+import com.example.proj_profess.dto.Auth;
 import com.example.proj_profess.dto.PasswordInfo;
 import com.example.proj_profess.entity.Client;
+import com.example.proj_profess.entity.Provider;
 import com.example.proj_profess.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,12 @@ public class ClientController {
     public Client editPasswordClient(@PathVariable Long idClient, @RequestBody PasswordInfo passwordInfo){
         return clientService.editPasswordClient(idClient,passwordInfo);
     }
+
+    @GetMapping("/auth")
+    public Client authenticateClient(@RequestBody Auth auth){
+        return clientService.authenticateClient(auth);
+    }
+
     @DeleteMapping("deleteClient/{idClient}")
     public ResponseEntity<?> deleteClient (@PathVariable Long idClient){
         return clientService.deleteClient(idClient);

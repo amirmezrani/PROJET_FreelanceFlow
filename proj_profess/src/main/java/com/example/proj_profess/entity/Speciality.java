@@ -16,8 +16,22 @@ public class Speciality {
 
     private String label;
 
+    public Long getIdSpeciality() {
+        return idSpeciality;
+    }
 
-   /* @OneToMany(fetch = FetchType.LAZY)
+    public void setIdSpeciality(Long idSpeciality) {
+        this.idSpeciality = idSpeciality;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+/* @OneToMany(fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Provider> providerList;*/
 }
