@@ -29,8 +29,13 @@ public class ContractService {
         return contractRepo.findByProviderId(idProvider);
     }
 
-    public List<Contract> getAllContractAccept(){
-        List<Contract> contracts= contractRepo.findAll();
+    public List<Contract> getAllContractClient(Long idClient){
+        return contractRepo.findByClientId(idClient);
+    }
+
+    // ***************
+    public List<Contract> getAllContractAcceptClient(Long idClient){
+        List<Contract> contracts= getAllContractClient(idClient);
         List<Contract> contracts1= new ArrayList<>();
         for (Contract contract:contracts){
             if (contract.getResponse().equals("true")){
@@ -40,8 +45,8 @@ public class ContractService {
         return contracts1;
     }
 
-    public List<Contract> getAllContractReject(){
-        List<Contract> contracts= contractRepo.findAll();
+    public List<Contract> getAllContractRejectClient(Long idClient){
+        List<Contract> contracts= getAllContractClient(idClient);
         List<Contract> contracts1= new ArrayList<>();
         for (Contract contract:contracts){
             if (contract.getResponse().equals("false")){
@@ -52,22 +57,56 @@ public class ContractService {
     }
 
 
-    public List<Contract> getAllContractPending(){
-        List<Contract> contracts= contractRepo.findAll();
+    public List<Contract> getAllContractPendingClient(Long idClient){
+        List<Contract> contracts= getAllContractClient(idClient);
         List<Contract> contracts1= new ArrayList<>();
         for (Contract contract:contracts){
-            if (contract.getResponse()==null){
+            if (contract.getResponse()==""){
                 contracts1.add(contract);
             }
         }
         return contracts1;
     }
 
-    public List<Contract> getAllContractClient(Long idClient){
-        return contractRepo.findByClientId(idClient);
+    // ***************
+
+    public List<Contract> getAllContractAcceptProvider(Long idProvider){
+        List<Contract> contracts= getAllContractProvider(idProvider);
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse().equals("true")){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
     }
 
-    public Contract addContract(Contract contract){
+    public List<Contract> getAllContractRejectProvider(Long idProvider){
+        List<Contract> contracts= getAllContractProvider(idProvider);
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse().equals("false")){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
+    }
+
+
+    public List<Contract> getAllContractPendingProvider(Long idProvider) {
+        List<Contract> contracts = getAllContractProvider(idProvider);
+        List<Contract> contracts1= new ArrayList<>();
+        for (Contract contract:contracts){
+            if (contract.getResponse()==""){
+                contracts1.add(contract);
+            }
+        }
+        return contracts1;
+    }
+
+        //********
+
+        public Contract addContract(Contract contract){
 
        /* Provider provider= providerService.getProviderById(contract.getProvider().getId());
         Client client= clientService.getClientById(contract.getClient().getId());
@@ -82,6 +121,7 @@ public class ContractService {
         //provider.getContractList().add(contract);
         //client.getContractList().add(contract);
         contract.setLocalDateTime(LocalDateTime.now());
+        contract.setResponse("");
 
         return contractRepo.save(contract);
     }

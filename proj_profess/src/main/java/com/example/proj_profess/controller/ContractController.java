@@ -4,8 +4,6 @@ import com.example.proj_profess.entity.Contract;
 import com.example.proj_profess.service.ContractService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,21 +19,42 @@ public class ContractController {
         return contractService.addContract(contract);
     }
 
-    @GetMapping("/getContract/accept")
-    public List<Contract> getAllContractAccept(){
-        return contractService.getAllContractAccept();
+    //*******
+    @GetMapping("/client/{idClient}/getContract/accept")
+    public List<Contract> getAllContractAccept(@PathVariable Long idClient){
+        return contractService.getAllContractAcceptClient(idClient);
     }
 
-    @GetMapping("/getContract/reject")
-    public List<Contract> getAllContractReject(){
-        return contractService.getAllContractReject();
+    @GetMapping("/client/{idClient}/getContract/reject")
+    public List<Contract> getAllContractReject(@PathVariable Long idClient){
+        return contractService.getAllContractRejectClient(idClient);
     }
 
 
-    @GetMapping("/getContract/pending")
-    public List<Contract> getAllContractPending(  ){
-        return contractService.getAllContractPending();
+    @GetMapping("/client/{idClient}/getContract/pending")
+    public List<Contract> getAllContractPending(  @PathVariable Long idClient){
+        return contractService.getAllContractPendingClient(idClient);
     }
+
+    //*******
+
+    @GetMapping("/provider/{idProvider}/getContract/accept")
+    public List<Contract> getAllContractAcceptC(@PathVariable Long idProvider){
+        return contractService.getAllContractAcceptProvider(idProvider);
+    }
+
+    @GetMapping("/provider/{idProvider}/getContract/reject")
+    public List<Contract> getAllContractRejectC(@PathVariable Long idProvider){
+        return contractService.getAllContractRejectProvider(idProvider);
+    }
+
+
+    @GetMapping("/provider/{idProvider}/getContract/pending")
+    public List<Contract> getAllContractPendingC(  @PathVariable Long idProvider){
+        return contractService.getAllContractPendingProvider(idProvider);
+    }
+
+    //*******
 
 
     @GetMapping("/getContract/{idContract}")
