@@ -46,7 +46,7 @@ public class ClientController {
         return clientService.editPasswordClient(idClient,passwordInfo);
     }
 
-    @GetMapping("/auth")
+    @PostMapping("/auth")
     public Client authenticateClient(@RequestBody Auth auth){
         return clientService.authenticateClient(auth);
     }

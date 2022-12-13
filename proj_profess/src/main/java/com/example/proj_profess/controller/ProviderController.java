@@ -65,7 +65,7 @@ public class ProviderController {
         return providerService.feedBack(idProvider,feed) ;
     }
 
-    @GetMapping("/auth")
+    @PostMapping("/auth")
     public Provider authenticateProvider(@RequestBody Auth auth){
         return providerService.authenticateProvider(auth);
     }
