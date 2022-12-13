@@ -19,7 +19,6 @@ public class Job {
     private String description;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProvider")
     @JsonIgnore

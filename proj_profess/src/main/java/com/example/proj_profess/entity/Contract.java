@@ -21,6 +21,10 @@ public class Contract {
     private String response;
     private LocalDateTime localDateTime;
 
+    private String longitude;
+
+    private String latitude;
+
     //private Date date;
 
 
@@ -84,5 +88,21 @@ public class Contract {
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.proj_profess.repository;
 
 import com.example.proj_profess.entity.Contract;
-import com.example.proj_profess.entity.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
