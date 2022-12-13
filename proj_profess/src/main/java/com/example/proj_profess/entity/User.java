@@ -18,7 +18,7 @@ public abstract class User implements Serializable {
     @Column(name = "email", nullable = false,unique = true)
     private String email;
 
-    @JsonIgnore
+    //@JsonIgnore
     private String password;
 
     public Long getId() {

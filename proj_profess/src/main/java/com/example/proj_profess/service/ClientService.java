@@ -51,7 +51,6 @@ public class ClientService {
         client1.setBirthday(client.getBirthday());
         client1.setCity(client.getCity());
         client1.setStreet(client.getStreet());
-        client1.setPassword(client.getPassword());
         return clientRepo.save(client1);
 
     }
