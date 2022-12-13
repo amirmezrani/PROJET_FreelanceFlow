@@ -1,5 +1,6 @@
 package com.example.proj_profess.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public abstract class User implements Serializable {
     @Column(name = "email", nullable = false,unique = true)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     public Long getId() {
