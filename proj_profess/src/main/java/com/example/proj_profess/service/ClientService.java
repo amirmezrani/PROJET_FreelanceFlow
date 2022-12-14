@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @Service
@@ -18,6 +19,7 @@ public class ClientService {
 
     private ClientRepo clientRepo;
     private CityService cityService;
+    private MailSenderService mailSenderService;
 
 
 
@@ -59,6 +61,17 @@ public class ClientService {
         Client client=getClientById(idClient);
         if (client.getPassword().equals(passwordInfo.getPassword())){
             client.setPassword(passwordInfo.getNewPassword());
+            try {
+                this.mailSenderService.send(client.getEmail(),
+                        "Modfication de mot de passe  ",
+                        "Bonjour,<br>\n " +
+                                "Votre mot de passe a été changé.<br>\n " +
+                                "Merci pour votre confiance.<br>\n" +
+                                " Cordialement");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
             return clientRepo.save(client);
         }
         else {

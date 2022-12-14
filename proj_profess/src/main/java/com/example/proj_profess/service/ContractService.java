@@ -131,8 +131,11 @@ public class ContractService {
         contract.setResponse("true");
         try {
             this.mailSenderService.send(contract.getClient().getEmail(),
-                    "Service demandé  ",
-                    "votre service commandé est acceptée");
+                    "Acceptation de Service  ",
+                    "Bonjour,<br>\n " +
+                            "Votre demande de service sur notre application a été acceptée.<br>\n " +
+                            "Merci pour votre confiance.<br>\n" +
+                            " Cordialement");
 
         } catch (MessagingException e) {
             e.printStackTrace();

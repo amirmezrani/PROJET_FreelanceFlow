@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @Service
@@ -20,6 +21,7 @@ public class ProviderService {
     private ProviderRepo providerRepo;
     private CityService cityService;
     private SpecialityService specialityService;
+    MailSenderService mailSenderService;
 
     public Provider getProviderById (Long idProvider){
         return  providerRepo.findById(idProvider).orElseThrow(()-> new IllegalArgumentException("Provider ID not Found"));
@@ -75,6 +77,17 @@ public class ProviderService {
         Provider provider=getProviderById(idProvider);
         if (provider.getPassword().equals(passwordInfo.getPassword())){
             provider.setPassword(passwordInfo.getNewPassword());
+            try {
+                this.mailSenderService.send(provider.getEmail(),
+                        "Modfication de mot de passe  ",
+                        "Bonjour,<br>\n " +
+                                "Votre mot de passe a été changé.<br>\n " +
+                                "Merci pour votre confiance.<br>\n" +
+                                " Cordialement");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
             return providerRepo.save(provider);
         }
         else {
